@@ -1,12 +1,12 @@
-import protoLoader from "@grpc/proto-loader";
-import grpc from "grpc";
+const protoLoader = require("@grpc/proto-loader");
+const grpc = require("grpc");
 
 const server = new grpc.Server();
 const SERVER_ADDRESS = "0.0.0.0:5001";
 
 // Load protobuf
 const proto = grpc.loadPackageDefinition(
-  protoLoader.loadSync("protos/chat.proto", {
+  protoLoader.loadSync("./chat.proto", {
     keepCase: true,
     longs: String,
     enums: String,
@@ -15,19 +15,19 @@ const proto = grpc.loadPackageDefinition(
   })
 );
 
-const users: any = [];
+const users = [];
 
-function join(call: any, callback: any) {
+function join(call, callback) {
   users.push(call);
   notifyChat({ user: "Server", text: "new user joined ..." });
 }
 
-function send(call: any, callback: any) {
+function send(call, callback) {
   notifyChat(call.request);
 }
 
-function notifyChat(message: any) {
-  users.forEach((user: any) => {
+function notifyChat(message) {
+  users.forEach((user) => {
     user.write(message);
   });
 }
