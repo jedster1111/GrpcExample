@@ -9,14 +9,14 @@ const chat_pb_1 = require("../proto/chat_pb");
 const server = new grpc_1.default.Server();
 const SERVER_ADDRESS = "0.0.0.0:5001";
 const users = [];
-const join = (call, callback) => {
+const join = (call) => {
     users.push(call);
     const message = new chat_pb_1.Message();
     message.setUser("Server");
     message.setText("New user joined");
     notifyChat(message);
 };
-function send(call, callback) {
+function send(call) {
     notifyChat(call.request);
 }
 function notifyChat(message) {
@@ -24,7 +24,6 @@ function notifyChat(message) {
         user.write(message);
     });
 }
-// TODO still lacking type safety here!
 server.addService(chat_grpc_pb_1.ChatService, { join, send });
 server.bind(SERVER_ADDRESS, grpc_1.default.ServerCredentials.createInsecure());
 server.start();

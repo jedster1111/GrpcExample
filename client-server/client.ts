@@ -25,7 +25,7 @@ function startChat() {
     message.setUser(username);
     message.setText(text);
     client.send(message, err => {
-      console.log("not sure where this will show up");
+      console.log(err);
     });
   });
 }
@@ -37,7 +37,7 @@ function onData(message: Message) {
   console.log(`${message.getUser()}: ${message.getText()}`);
 }
 
-rl.question("What's your name? ", answer => {
+rl.question("What's your name?", answer => {
   username = answer;
 
   startChat();
