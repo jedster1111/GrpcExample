@@ -1,14 +1,14 @@
 {
-    "defaultSeverity": "error",
-    "extends": ["tslint:recommended", "tslint-config-prettier"],
-    "jsRules": {},
-    "rules": {
-      "no-console": {
-        "severity": "warn"
-      },
-      "prettier": true,
-      "interface-name": false,
-      "object-literal-sort-keys": false
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended", "tslint-config-prettier"],
+  "jsRules": {},
+  "rules": {
+    "no-console": {
+      "severity": "warn"
     },
-    "rulesDirectory": ["tslint-plugin-prettier"]
-  }
+    "prettier": true,
+    "interface-name": false,
+    "object-literal-sort-keys": false
+  },
+  "rulesDirectory": ["tslint-plugin-prettier"]
+}

@@ -1,35 +1,38 @@
 "use strict";
-var protoLoader = require("@grpc/proto-loader");
-var grpc = require("grpc");
-var readline = require("readline");
-var rl = readline.createInterface({
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const grpc_1 = __importDefault(require("grpc"));
+const readline_1 = __importDefault(require("readline"));
+const chat_grpc_pb_1 = require("../proto/chat_grpc_pb");
+const chat_pb_1 = require("../proto/chat_pb");
+const rl = readline_1.default.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-var proto = grpc.loadPackageDefinition(protoLoader.loadSync("./chat.proto", {
-    keepCase: true,
-    longs: String,
-    enums: String,
-    defaults: true,
-    oneofs: true
-}));
-var REMOTE_SERVER = "0.0.0.0:5001";
-var username;
-var client = new proto.example.Chat(REMOTE_SERVER, grpc.credentials.createInsecure());
+const REMOTE_SERVER = "0.0.0.0:5001";
+let username;
+const client = new chat_grpc_pb_1.ChatClient(REMOTE_SERVER, grpc_1.default.credentials.createInsecure());
 function startChat() {
-    var channel = client.join({ user: username });
+    const channel = client.join({ user: username });
     channel.on("data", onData);
-    rl.on("line", function (text) {
-        client.send({ user: username, text: text }, function (res) { });
+    rl.on("line", text => {
+        const message = new chat_pb_1.Message();
+        message.setUser(username);
+        message.setText(text);
+        client.send(message, err => {
+            console.log("not sure where this will show up");
+        });
     });
 }
 function onData(message) {
-    if (message.user === username) {
+    if (message.getUser() === username) {
         return;
     }
-    console.log(message.user + ": " + message.text);
+    console.log(`${message.getUser()}: ${message.getText()}`);
 }
-rl.question("What's your name? ", function (answer) {
+rl.question("What's your name? ", answer => {
     username = answer;
     startChat();
 });
