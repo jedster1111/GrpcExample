@@ -4,6 +4,8 @@ An app to try out setting up two Node servers that communicate using gRPC whilst
 
 ## Setup
 
+**Note the commands below will need to be changed to run on your machine. If on windows just change the file structures in package.json to match your project's location.**
+
 Install dependencies: `yarn`  
 Build: `yarn build`. Files will be compiled into `./build`  
 Startup main server: `yarn start:main`  
