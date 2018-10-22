@@ -1,18 +1,15 @@
 # GrpcExample
 
-An app to try out setting up two Node servers that communicate using gRPC
+An app to try out setting up two Node servers that communicate using gRPC whilst maintaining type safety with TypeScript.
 
 ## Setup
 
-`yarn`  
-install protoc from [protoc releases](https://github.com/protocolbuffers/protobuf/releases)
+Install dependencies: `yarn`  
+Build: `yarn build`. Files will be compiled into `./build`  
+Startup main server: `yarn start:main`  
+Startup client server (in a different console): `yarn start:client`  
+Open multiple consoles to send messages between them.
 
-## Commands
+## Using
 
-Static code generation using protoc:
-
-```txt
-C:\coding\work\GrpcExample\node_modules\.bin\grpc_tools_node_protoc.cmd --js_out=import_style=commonjs,binary:C:\coding\work\GrpcExample --grpc_out=C:\coding\work\GrpcExample --plugin=protoc-gen-grpc=C:\coding\work\GrpcExample\node_modules\.bin\grpc_tools_node_protoc_plugin.cmd -I C:\coding\work\GrpcExample C:\coding\work\GrpcExample\chat.proto
-
-C:\coding\work\GrpcExample\node_modules\.bin\grpc_tools_node_protoc.cmd --plugin=protoc-gen-ts=C:\coding\work\GrpcExample\node_modules\.bin\protoc-gen-ts.cmd --ts_out=C:\coding\work\GrpcExample -I C:\coding\work\GrpcExample C:\coding\work\GrpcExample\chat.proto
-```
+[grpc_tools_node_protoc_ts](https://github.com/agreatfool/grpc_tools_node_protoc_ts) is used to generate `.d.ts` files
