@@ -1,6 +1,8 @@
 # GrpcExample
 
-An app to try out setting up two Node servers that communicate using gRPC whilst maintaining type safety with TypeScript.
+An very simple chat app to try out setting up two Node servers that communicate using gRPC whilst maintaining type safety with TypeScript.
+
+![example usage](http://puu.sh/BQNuh/b920beb932.png)
 
 ## Setup
 
